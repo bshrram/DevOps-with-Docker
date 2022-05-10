@@ -1,0 +1,5 @@
+$ docker run -it ubuntu
+
+root@d20e62363c1e:/# apt update && apt upgrade
+root@d20e62363c1e:/# apt install curl
+root@d20e62363c1e:/# sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;'
