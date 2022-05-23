@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+
+  ml-backend:
+    image: bshr/ml-backend
+    container_name: ml-backend
+    volumes:
+      - model:/src/model
+    build: ./ml-kurkkumopo-backend-master
+    depends_on:
+      - ml-training
+    ports:
+      - 5000:5000
+  
+  ml-training:
+    image: bshr/ml-training
+    container_name: ml-training
+    volumes:
+      - model:/src/model
+      - imgs:/src/imgs
+      - data:/src/data
+    build: ./ml-kurkkumopo-training-master
+  
+  ml-frontend:
+    image: bshr/ml-frontend
+    container_name: ml-frontend
+    build: ./ml-kurkkumopo-frontend-master
+    ports:
+      - 3000:3000
+
+
+
+volumes:
+  model:
+  imgs:
+  data:
